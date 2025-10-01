@@ -1,32 +1,26 @@
-/* ------------------------------
-   General Styles
------------------------------- */
-body, html {
+/* General Styles */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #f5f6fa;
-  color: #2e2e2e;
+  background-color: #f5f6fa; 
+  color: #2e2e2e; 
   line-height: 1.65;
-  font-size: 16px;
+  font-size: 16px; 
   scroll-behavior: smooth;
 }
 
-/* ------------------------------
-   Sidebar
------------------------------- */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 220px;
-  height: 100vh; /* full viewport height */
+  height: 100vh;
   background-color: #2b2d42;
   color: #fff;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  overflow-y: auto; /* allows sidebar to scroll if needed */
 }
 
 .sidebar h2 {
@@ -49,13 +43,12 @@ body, html {
   background-color: #8d99ae;
 }
 
-/* ------------------------------
-   Main Content
------------------------------- */
+/* Main Content */
 .content {
-  margin-left: 240px; /* sidebar width + padding */
+  margin-left: 240px; /* same as sidebar width + padding */
   padding: 40px 30px;
   max-width: 900px;
+  width: 100%;
 }
 
 /* Section Headers */
@@ -66,9 +59,7 @@ section h1 {
   margin-top: 0;
 }
 
-/* ------------------------------
-   Projects
------------------------------- */
+/* Projects */
 .project {
   background-color: #fff;
   border-left: 5px solid #2b2d42;
@@ -76,7 +67,7 @@ section h1 {
   margin: 20px 0;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .project:hover {
@@ -94,9 +85,7 @@ section h1 {
   font-style: italic;
 }
 
-/* ------------------------------
-   Fun Facts
------------------------------- */
+/* Fun Facts */
 #fun ul {
   list-style: none;
   padding: 0;
@@ -110,11 +99,6 @@ section h1 {
   display: flex;
   align-items: center;
   font-size: 1.05em;
-  transition: background 0.3s;
-}
-
-#fun ul li:hover {
-  background-color: #d8dee9;
 }
 
 #fun ul li a {
@@ -122,9 +106,7 @@ section h1 {
   text-decoration: underline;
 }
 
-/* ------------------------------
-   Links
------------------------------- */
+/* Links */
 a {
   color: #ef233c;
 }
@@ -133,17 +115,13 @@ a:hover {
   text-decoration: none;
 }
 
-/* ------------------------------
-   Contact Section
------------------------------- */
+/* Contact Section */
 #contact a {
   color: #2b2d42;
   text-decoration: underline;
 }
 
-/* ------------------------------
-   Responsive Design
------------------------------- */
+/* Responsive for smaller screens */
 @media screen and (max-width: 768px) {
   .sidebar {
     position: relative;
@@ -160,9 +138,5 @@ a:hover {
 
   section h1 {
     font-size: 1.5em;
-  }
-
-  #fun ul li {
-    font-size: 1em;
   }
 }
