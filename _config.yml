@@ -1,31 +1,30 @@
+# Site settings
 title: "Nya Feinstein"
-name: "Nya Feinstein"
 description: "PhD Student | Data Scientist | Linguist"
+url: "https://nyafein.github.io" # your GitHub Pages URL
+baseurl: "" # leave empty if your site is at the root
 
+# Theme
 theme: minimal-mistakes-jekyll
 
+# Plugins supported by GitHub Pages
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-# Sidebar settings
-sidebar:
-  nav: "sidebar-nav"
+# Defaults for pages
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "single"
 
-# Navigation links
-navigation:
-  - title: "About"
-    url: /about/
-  - title: "Research"
-    url: /research/
-  - title: "Projects"
-    url: /projects/
-  - title: "Fun Facts"
-    url: /fun/
-  - title: "In the News"
-    url: /news/
-  - title: "Contact"
-    url: /contact/
+# For later: Add sidebar 
+#sidebar:
+#  nav: ["About", "Education", "Research", "Projects", "Fun Facts", "Nya in the News", "Contact"]
+
+
 
 
 #https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll

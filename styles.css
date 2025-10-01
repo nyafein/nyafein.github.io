@@ -1,45 +1,133 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: #2b2d42;
+  color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  color: #edf2f4;
+}
+
+.sidebar nav a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin: 10px 0;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.sidebar nav a:hover {
+  background-color: #8d99ae;
+}
+
+/* Main Content */
+.content {
+  margin-left: 240px;
+  padding: 40px 30px;
+  max-width: 900px;
+}
+
+/* Section Headers */
+section h1 {
+  border-bottom: 2px solid #2b2d42;
+  padding-bottom: 8px;
+  color: #2b2d42;
+  margin-top: 0;
+}
+
+/* Projects */
+.project {
+  background-color: #fff;
+  border-left: 5px solid #2b2d42;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.project h2 {
+  color: #2b2d42;
+  margin-top: 0;
+}
+
+.project p em {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Fun Facts */
+#fun ul {
+  list-style: none;
+  padding: 0;
+}
+
+#fun ul li {
+  margin: 10px 0;
+  background: #edf2f4;
+  padding: 12px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 1.05em;
+}
+
+#fun ul li a {
+  color: #2b2d42;
+  text-decoration: underline;
+}
+
+/* Links */
+a {
+  color: #ef233c;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Contact Section */
+#contact a {
+  color: #2b2d42;
+  text-decoration: underline;
+}
+
+/* Responsive for smaller screens */
+@media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+  }
+
+  .content {
+    margin-left: 0;
     padding: 20px;
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-}
-
-nav a:hover {
-    color: #007BFF;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-footer {
-    text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid #ccc;
+  }
 }
