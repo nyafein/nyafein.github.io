@@ -1,0 +1,7 @@
+title: Nya S. Feinstein
+description: Personal website and CV
+baseurl: "" # leave empty for root
+url: "https://nyafein.github.io"
+theme: midnight
+
+#https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
