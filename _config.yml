@@ -4,8 +4,6 @@ description: "PhD Student | Data Scientist | Linguist"
 url: "https://nyafein.github.io" # your GitHub Pages URL
 baseurl: "" # leave empty if your site is at the root
 
-# Theme
-theme: jekyll-theme-cayman
 
 # Plugins supported by GitHub Pages
 plugins:
