@@ -10,6 +10,43 @@ body {
   scroll-behavior: smooth;
 }
 
+#about {
+  display: flex;          /* enables flex layout */
+  align-items: flex-start; /* aligns image and text at the top */
+  gap: 20px;              /* space between image and text */
+  flex-wrap: wrap;        /* makes it responsive on smaller screens */
+}
+#about h1 {
+  width: 100%;               /* keeps the heading full width */
+  margin-bottom: 15px;
+}
+
+
+.about-text {
+min-width: 0;
+}
+
+.profile-pic {
+margin-bottom: 15px;     /* space below image */
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 25%;
+  object-fit: cover;
+  flex-shrink: 0;         /* prevents image from shrinking */
+}
+
+.profile-pic-container {
+  flex-shrink: 0;         /* prevents container from shrinking */
+}
+
+#about p {
+  flex: 1;                /* lets text take remaining space */
+}
+
+
 /* Sidebar */
 .sidebar {
   position: fixed;
