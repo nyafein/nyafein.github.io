@@ -1,10 +1,31 @@
-title: Nya S. Feinstein
-description: Personal website and CV
-baseurl: "" # leave empty for root
-url: "https://nyafein.github.io"
-theme: minima
-# remote_theme: pages-themes/slate@v0.2.0
-# plugins:
-# - jekyll-remote-theme
+title: "Nya Feinstein"
+name: "Nya Feinstein"
+description: "PhD Student | Data Scientist | Linguist"
+
+theme: minimal-mistakes-jekyll
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Sidebar settings
+sidebar:
+  nav: "sidebar-nav"
+
+# Navigation links
+navigation:
+  - title: "About"
+    url: /about/
+  - title: "Research"
+    url: /research/
+  - title: "Projects"
+    url: /projects/
+  - title: "Fun Facts"
+    url: /fun/
+  - title: "In the News"
+    url: /news/
+  - title: "Contact"
+    url: /contact/
+
 
 #https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
