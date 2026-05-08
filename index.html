@@ -4,210 +4,907 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nya Feinstein</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-light: #E1F5EE;
+      --teal-mid: #1D9E75;
+      --teal-dark: #085041;
+      --teal-border: #9FE1CB;
+      --text-primary: #1a1a18;
+      --text-secondary: #5F5E5A;
+      --text-muted: #888780;
+      --bg-primary: #FDFCFA;
+      --bg-secondary: #F5F3EF;
+      --border: #E0DDD6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── LAYOUT ── */
+    .site-wrap {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR NAV ── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 220px;
+      height: 100vh;
+      background: var(--bg-primary);
+      border-right: 0.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 1.8rem;
+      z-index: 100;
+    }
+
+    .sidebar-name {
+      font-family: 'Fraunces', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+    }
+
+    .sidebar-role {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal-mid);
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-rule {
+      width: 28px;
+      height: 1.5px;
+      background: var(--teal-mid);
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: 1;
+    }
+
+    .sidebar-nav li a {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 8px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .sidebar-nav li a:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    .sidebar-nav li a.active {
+      color: var(--teal-dark);
+      background: var(--teal-light);
+      font-weight: 500;
+    }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .sidebar-cv {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--teal-dark);
+      background: var(--teal-light);
+      border: 0.5px solid var(--teal-border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .sidebar-cv:hover { background: #c8eede; }
+
+    .lang-select {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg-primary);
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .lang-select:hover { border-color: var(--teal-mid); }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+      margin-left: 220px;
+      flex: 1;
+      max-width: 760px;
+      padding: 5rem 3.5rem 6rem;
+    }
+
+    section {
+      padding: 4rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    #about { padding-top: 1rem; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-mid);
+      margin-bottom: 1rem;
+    }
+
+    .hero-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(34px, 4vw, 50px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-heading em {
+      font-style: italic;
+      color: var(--teal-mid);
+    }
+
+    .profile-pic {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--bg-secondary);
+      float: right;
+      margin: 0 0 1.5rem 2rem;
+    }
+
+    .bio-text p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .bio-text p:last-child { margin-bottom: 0; }
+
+    .bio-text a {
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+      transition: border-color 0.2s;
+    }
+
+    .bio-text a:hover { border-color: var(--teal-mid); }
+
+    .hero-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      clear: both;
+    }
+
+    .hero-card {
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+    }
+
+    .hero-card-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card-val {
+      font-family: 'Fraunces', serif;
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-mid);
+      margin-bottom: 1.8rem;
+    }
+
+    .subsection-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 3rem 0 1.2rem;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-entry { margin-bottom: 1.8rem; }
+    .edu-entry:last-child { margin-bottom: 0; }
+
+    .edu-degree {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+
+    .edu-school {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 0.15rem;
+    }
+
+    .edu-meta { font-size: 12px; color: var(--text-muted); }
+
+    .edu-tag {
+      display: inline-block;
+      font-size: 11px;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-top: 0.4rem;
+      margin-right: 4px;
+    }
+
+    /* ── RESEARCH ── */
+    .research-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+
+    .research-list li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.65;
+    }
+
+    .research-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--teal-mid);
+      font-size: 13px;
+      top: 2px;
+    }
+
+    /* ── PROJECTS ── */
+    .project-entry {
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .project-entry:first-child { padding-top: 0; }
+    .project-entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .project-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-badge {
+      flex-shrink: 0;
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 3px;
+    }
+
+    .project-title {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .project-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc ul { list-style: none; padding: 0; }
+
+    .project-desc ul li {
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 0.2rem;
+    }
+
+    .project-desc ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--teal-mid);
+    }
+
+    .project-link {
+      font-size: 12px;
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+      transition: border-color 0.2s;
+    }
+
+    .project-link:hover { border-color: var(--teal-mid); }
+
+    /* ── PUBLICATIONS ── */
+    .pub-entry {
+      padding: 1.2rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .pub-entry:first-child { padding-top: 0; }
+    .pub-entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .pub-type {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 0.5px solid var(--border);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .pub-text em { font-style: italic; }
+
+    .pub-text a {
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+    }
+
+    .pub-text a:hover { border-color: var(--teal-mid); }
+
+    /* ── VOLUNTEER ── */
+    .volunteer-text p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .volunteer-text p:last-child { margin-bottom: 0; }
+
+    .volunteer-text a {
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+    }
+
+    .volunteer-text a:hover { border-color: var(--teal-mid); }
+
+    /* ── FUN FACTS ── */
+    .fun-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+
+    .fun-list li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .fun-list a {
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+    }
+
+    .fun-list a:hover { border-color: var(--teal-mid); }
+
+    /* ── NEWS ── */
+    .news-group { margin-bottom: 1.8rem; }
+    .news-group:last-child { margin-bottom: 0; }
+
+    .news-group-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .news-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .news-list a {
+      font-size: 14px;
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+    }
+
+    .news-list a:hover { border-color: var(--teal-mid); }
+
+    /* ── CONTACT ── */
+    .contact-intro {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-intro a {
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      font-size: 14px;
+      color: var(--teal-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-border);
+      transition: border-color 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--teal-mid); }
+
+    /* ── FLAG COUNTER ── */
+    .flag-wrap {
+      padding-top: 3rem;
+      text-align: center;
+    }
+
+    .flag-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 3.5rem;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 0.5px solid var(--border);
+      margin-left: 220px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 0.5px solid var(--border);
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 1rem 1.2rem;
+        gap: 0.8rem;
+      }
+
+      .sidebar-rule, .sidebar-role { display: none; }
+
+      .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+      }
+
+      .sidebar-bottom {
+        flex-direction: row;
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 2rem 1.2rem 4rem;
+      }
+
+      footer { margin-left: 0; }
+
+      .hero-cards { grid-template-columns: 1fr; }
+      .profile-pic { width: 85px; height: 85px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Nya Feinstein</h2>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#research">Research</a>
-      <a href="#projects">Projects</a>
-      <a href="#volunteer work">Volunteer Work</a>
-      <a href="#fun">Fun Facts</a>
-      <a href="#news">Nya in the News</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
 
-<div class="content">
-  <section id="about">
-    <h1>About Me</h1>
-    <div id="profile-pic-container">
-    <img src="20250215_161624.jpg" alt="Nya Feinstein" class="profile-pic">
+<div class="site-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="#about" class="sidebar-name">Nya Feinstein</a>
+
+    <div class="sidebar-rule"></div>
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#fun">Fun Facts</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="sidebar-bottom">
+      <select class="lang-select" onchange="switchLang(this.value)" aria-label="Select language">
+        <option value="en">English</option>
+        <option value="be">Беларуская</option>
+        <option value="pl">Polski</option>
+        <option value="ru">Русский</option>
+        <option value="fr">Français</option>
+      </select>
+      <a href="https://drive.google.com/file/d/1n653fLnVBG3urUsXLhU58vrQQc0k7Yfx/view?usp=sharing"
+         target="_blank" rel="noopener noreferrer" class="sidebar-cv">CV ↗</a>
     </div>
-    <p>
-      Hello! I’m <strong>Nya Feinstein</strong>, an aspiring <strong> Data Scientist, Computational Social Scientist, and Linguist </strong> with a passion for languages, cultures, and mixed-method analysis as an approach to understanding the world around us! 
-      I’m currently pursuing my PhD in Intelligent Systems at the University of Pittsburgh in the 
-      <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">PICSO Lab</a>, 
-      supervised by Professor Yu-Ru Lin. I’m exploring how media systems, languages, and communities shape 
-      information exchange through networks. My work, rooted in <strong> Computational Social Science and AI for social good </strong>, blends computational methods and humanities insights with the goal of connecting 
-      people and data in meaningful ways.
-    </p>
-    <p>
-      I also have a strong focus on <strong>Belarusian and Slavic Studies</strong>, where I combine computational linguistics, sociolinguistics, political analysis, education, and outreach. 
-      This passion blooms from my commitment to language advocacy and the role of language, culture, and history as a marker of identity and solidarity.
-    </p>
+  </aside>
 
-  </section>
+  <!-- MAIN -->
+  <main class="content">
 
-<section id="education">
-  <h1>Education</h1>
-  <p>
-    I began my <strong>PhD in Intelligent Systems at the University of Pittsburgh</strong> in July 2025. 
-  </p>
-  <p>
-    I graduated from <strong>West Virginia University</strong> in December 2024, earning a 
-    <strong>B.S. in Data Science</strong>, a <strong>B.A. in International Studies (Security and Diplomacy)</strong>, 
-    and a <strong>B.A. in Russian Studies</strong>, along with a Minor in French and a Certificate in Global Competency 
-    (<em>Summa Cum Laude</em>).
-  </p>
-  <p>
-    I also studied abroad in Warsaw, Poland, at <strong>Collegium Civitas</strong>, 
-    an experience that further strengthened my interest in international connections and collaborative research.
-  </p>
-</section>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="hero-eyebrow">PhD Student · University of Pittsburgh</div>
+      <h1 class="hero-heading">Language, data,<br>and the <em>politics</em><br>of meaning.</h1>
 
+      <img src="20250215_161624.jpg" alt="Nya Feinstein" class="profile-pic">
 
-<section id="research">
-  <h1>Research</h1>
-  <p>My research spans the intersections of technology, society, and language. I’m especially interested in:</p>
-  <ul>
-    <li>How can deep learning help us understand nuanced meaning across multiple languages?</li>
-    <li>What do dynamic networks of communication reveal about how information spreads?</li>
-    <li>How can quantitative insights influence security, mitigate conflict, and lead to more productive approaches international relations?</li>
-    <li>In what ways can AI be applied for social good, and what are ethical issues we must consider?</li>
-    <li>How can digital humanities approaches deepen our understanding of Belarusian and Slavic studies?</li>
-  </ul>
-</section>
+      <div class="bio-text" id="bio-text">
+        <p id="bio-p1">Hello! I'm Nya Feinstein, a PhD student at the University of Pittsburgh working in the <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">PICSO Lab</a> under Dr. Yu-Ru Lin. My research sits at the intersection of Computational Social Science and Computational Linguistics, examining how cultural and contextual nuances embedded in language shape international discourse and information exchange across networks.</p>
+        <p id="bio-p2">This work is deeply intertwined with my commitment to Belarusian and Slavic Studies, where I combine computational linguistics, political analysis, education, and language advocacy.</p>
+      </div>
 
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-label">Current focus</div>
+          <div class="hero-card-val">Cross-cultural moral framing in political social media</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">Regional expertise</div>
+          <div class="hero-card-val">Belarus, Poland, post-Soviet political discourse</div>
+        </div>
+      </div>
+    </section>
 
-<section id="projects">
-  <h1>Projects</h1>
-  <p>My work spans computational linguistics, political analysis, and cultural research. Selected projects include:</p>
-  
-  <article class="project">
-    <h2>Sound of Self: Belarusian Identity and Protest Through Music</h2>
-    <p><em>Independent Scholarship, 01/2025 – 02/2025</em></p>
-    <ul>
-      <li>Mixed-method analysis using HDBSCAN for clustering and BERT for vector representation</li>
-      <li>Presented at the 2025 6th Annual Literature & Linguistics Interdisciplinary Conference (LINC) (Florida State University, Tallahassee, Florida)</li>
-    </ul>
-  </article>
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-label">Education</div>
 
-  <article class="project">
-    <h2>ConTEXT: Trend Analysis and Prediction of Conflict Between Russia and Ukraine</h2>
-    <p><em>West Virginia University, 08/2022 – 12/2024</em></p>
-    <ul>
-      <li>Topic modeling with LDA and BERTopic in Python; visualization in R</li>
-      <li>Presented at the 2024 SIAM Conference on Mathematics and Data Science (Atlanta, Georgia)</li>
-    </ul>
-  </article>
+      <div class="edu-entry">
+        <div class="edu-degree">PhD in Intelligent Systems</div>
+        <div class="edu-school">University of Pittsburgh, Pittsburgh, PA</div>
+        <div class="edu-meta">Expected May 2029</div>
+      </div>
 
-  <article class="project">
-    <h2>Syntax, Semantics, and Society: Machine Learning Analysis of Linguistic Relativity</h2>
-    <p><em>West Virginia University, 08/2024 – 12/2024</em></p>
-    <ul>
-      <li>Cross-linguistic analysis using BERT embeddings for semantic similarity</li>
-      <li>Presented at the Fall 2024 WVU Undergraduate Research Symposium (West Virginia University, Morgantown, West Virginia)</li>
-    </ul>
-  </article>
+      <div class="edu-entry">
+        <div class="edu-degree">M.S. in Intelligent Systems</div>
+        <div class="edu-school">University of Pittsburgh, Pittsburgh, PA</div>
+        <div class="edu-meta">Expected May 2027</div>
+      </div>
 
-<article class="project">
-  <h2>PolyProse: Let’s Learn Together! Interactive Data Web App</h2>
-  <p><em>West Virginia University, 08/2024 – 10/2024</em></p>
-  <ul>
-    <li>Python Streamlit app with speech-to-text, translation, and generative AI for language learning</li>
-    <li>Course project / Departmental demonstration</li>
-  </ul>
-  <p>
-    🔗 Give it a try! 
-    <a href="https://nyafein-polyprose-languagesarecool.streamlit.app/" target="_blank" rel="noopener noreferrer">
-      PolyProse Web App
-    </a>
-  </p>
-</article>
+      <div class="edu-entry">
+        <div class="edu-degree">B.S. Data Science · B.A. International Studies · B.A. Russian Studies</div>
+        <div class="edu-school">West Virginia University, Morgantown, WV</div>
+        <div class="edu-meta">December 2024 · GPA 3.9/4.0</div>
+        <div>
+          <span class="edu-tag">Summa Cum Laude</span>
+          <span class="edu-tag">Minor in French</span>
+          <span class="edu-tag">Certificate in Global Competency</span>
+        </div>
+      </div>
 
+      <div class="edu-entry">
+        <div class="edu-degree">Study Abroad</div>
+        <div class="edu-school">Collegium Civitas, Warsaw, Poland</div>
+        <div class="edu-meta">International connections and collaborative research</div>
+      </div>
+    </section>
 
-  <article class="project">
-    <h2>Belarusian Paremias: Unique Features and Linguistic Contact</h2>
-    <p><em>Independent, 08/2024 – 10/2024</em></p>
-    <ul>
-      <li>Analysis of multilingual paremias (Russian, Belarusian, Polish, Ukrainian)</li>
-      <li>Presented at the 2025 REECAS-NW Conference (University of Washington, Seattle, Washington)</li>
-    </ul>
-  </article>
+    <!-- RESEARCH -->
+    <section id="research">
+      <div class="section-label">Research Interests</div>
+      <ul class="research-list">
+        <li>How can deep learning help us understand nuanced meaning across multiple languages?</li>
+        <li>What do dynamic networks of communication reveal about how information spreads?</li>
+        <li>How can quantitative insights influence security, mitigate conflict, and lead to more productive approaches to international relations?</li>
+        <li>In what ways can AI be applied for social good, and what are the ethical issues we must consider?</li>
+        <li>How can digital humanities approaches deepen our understanding of Belarusian and Slavic studies?</li>
+      </ul>
+    </section>
 
-  <article class="project">
-    <h2>Жыве беларус(кая мова): Belarusian Language as Identity & Resistance</h2>
-    <p><em>West Virginia University, 01/2024 – 04/2024</em></p>
-    <ul>
-      <li>Examined political and cultural uses of Belarusian language as solidarity and rebellion</li>
-      <li>Presented at the 2024 Midwest Slavic Conference (The Ohio State University, Columbus, Ohio)</li>
-    </ul>
-  </article>
+    <!-- PROJECTS + PUBLICATIONS + VOLUNTEER -->
+    <section id="projects">
+      <div class="section-label">Projects</div>
 
-  <article class="project">
-    <h2>Knowing the Unknowns: Predictability of State-Level Attributes in Belarus</h2>
-    <p><em>West Virginia University, 08/2023 – 12/2023</em></p>
-    <ul>
-      <li>Applied ARIMA models in Python to time-series data</li>
-      <li>Course project</li>
-    </ul>
-  </article>
-</section>
+      <div class="project-entry">
+        <div class="project-top">
+          <span class="project-badge">Ongoing</span>
+          <div class="project-title">CALLA: Context-Aware Language Learning Application</div>
+        </div>
+        <div class="project-meta">University of Pittsburgh · 05/2026 – Present</div>
+        <div class="project-desc">Interactive, culturally-aware language learning application for low-resource languages. Current prototype focuses on Belarusian.</div>
+        <a href="https://calla-belarusian.streamlit.app/" target="_blank" rel="noopener noreferrer" class="project-link">Try the Belarusian prototype ↗</a>
+      </div>
 
+      <div class="project-entry">
+        <div class="project-top">
+          <span class="project-badge">Ongoing</span>
+          <div class="project-title">Credibility as a Societal Construct: Uncovering Cross-National Patterns of Information Perception in Public Discourse</div>
+        </div>
+        <div class="project-meta">University of Pittsburgh · 01/2026 – Present</div>
+        <div class="project-desc">Machine learning implementation of moral foundations theory for cross-national political discourse analysis.</div>
+      </div>
 
-<section id="volunteer work">
-  <h1>Volunteer Work</h1>
-     <p>
-      When not in the lab, I volunteer as a Russian tutor for the
-      <a href="https://www.ucis.pitt.edu/crees/" target="_blank" rel="noopener noreferrer">University of Pittsburgh Center for Russian, East European & Eurasian Studies</a>, 
-      as well as in affiliation with the Lithuanian, Russian, and Polish <a href="https://www.nationalityrooms.pitt.edu/" target="_blank" rel="noopener noreferrer">Nationality Rooms</a> at the University of Pittsburgh. 
-    </p>
-</section>
+      <div class="project-entry">
+        <div class="project-title">Sound of Self: Belarusian Identity and Protest Through Music</div>
+        <div class="project-meta">Independent Scholarship · 01/2025 – 02/2025</div>
+        <div class="project-desc">
+          <ul>
+            <li>Mixed-method analysis using HDBSCAN for clustering and BERT for vector representation</li>
+            <li>Presented at the 2025 6th Annual LINC Conference (Florida State University)</li>
+          </ul>
+        </div>
+      </div>
 
+      <div class="project-entry">
+        <div class="project-title">ConTEXT: Trend Analysis and Prediction of Conflict Between Russia and Ukraine</div>
+        <div class="project-meta">West Virginia University · 08/2022 – 12/2024</div>
+        <div class="project-desc">
+          <ul>
+            <li>Topic modeling with LDA and BERTopic in Python; visualization in R</li>
+            <li>Presented at the 2024 SIAM Conference on Mathematics and Data Science (Atlanta, Georgia)</li>
+          </ul>
+        </div>
+      </div>
 
-<section id="fun">
-  <h1>Fun Facts! I am... </h1>
-  <ul>
-    <li>🗣️ Fluent (somewhat) in English, Russian, and French, and have elementary understanding of Belarusian and Polish.</li>
-    <li>🧑‍🏫 Very passionate about teaching! I hold a TEFL certification, a French tutoring certification, and have three years of experience tutoring Russian.</li>
-    <li>🌍 An avid traveler! I’ve explored 16 countries (including four trips to Poland!)</li>
-    <li>🎹 A piano enthusiast with a very amateur <a href="https://www.youtube.com/@nyafeinstein" target="_blank"> YouTube channel</a>.</li>
-    <li>📖 A poetry lover! My favorite poets include Boris Pasternak, Yanka Kupala, and Robert William Service.</li>
-    <li>🥾 A hiking connaisseuse! I love wandering trails and pondering life’s questions.</li>
-  </ul>
-</section>
+      <div class="project-entry">
+        <div class="project-title">Syntax, Semantics, and Society: Machine Learning Analysis of Linguistic Relativity</div>
+        <div class="project-meta">West Virginia University · 08/2024 – 12/2024</div>
+        <div class="project-desc">
+          <ul>
+            <li>Cross-linguistic analysis using BERT embeddings for semantic similarity</li>
+            <li>Presented at the Fall 2024 WVU Undergraduate Research Symposium</li>
+          </ul>
+        </div>
+      </div>
 
+      <div class="project-entry">
+        <div class="project-title">PolyProse: Let's Learn Together! Interactive Data Web App</div>
+        <div class="project-meta">West Virginia University · 08/2024 – 10/2024</div>
+        <div class="project-desc">Python Streamlit app with speech-to-text, translation, and generative AI for language learning.</div>
+        <a href="https://nyafein-polyprose-languagesarecool.streamlit.app/" target="_blank" rel="noopener noreferrer" class="project-link">Try PolyProse ↗</a>
+      </div>
 
+      <div class="project-entry">
+        <div class="project-title">Belarusian Paremias: Analysis of Unique Features and Influences From Linguistic Contact</div>
+        <div class="project-meta">Independent · 08/2024 – 10/2024</div>
+        <div class="project-desc">
+          <ul>
+            <li>Analysis of multilingual paremias in Russian, Belarusian, Polish, and Ukrainian</li>
+            <li>Presented at the 2025 REECAS-NW Conference (University of Washington, Seattle)</li>
+          </ul>
+        </div>
+      </div>
 
-<section id="news">
-  <h1>Nya in the News</h1>
-  <p>Some articles and features about my work and studies:</p>
+      <div class="project-entry">
+        <div class="project-title">Жыве беларус(кая мова): Belarusian Language as Identity &amp; Resistance</div>
+        <div class="project-meta">West Virginia University · 01/2024 – 04/2024</div>
+        <div class="project-desc">
+          <ul>
+            <li>Examined political and cultural uses of Belarusian language as solidarity and rebellion</li>
+            <li>Presented at the 2024 Midwest Slavic Conference (The Ohio State University)</li>
+          </ul>
+        </div>
+      </div>
 
-  <h3>Academic & University</h3>
-  <ul>
-    <li><a href="https://eberly.wvu.edu/news-events/eberly-news/2024/04/21/students-from-across-eberly-have-been-named-outstanding-seniors-outstanding-gtas-and-eberly-scholars" target="_blank">Outstanding Senior Award – WVU Eberly College</a></li>
-    <li><a href="https://mathanddata.wvu.edu/in-the-spotlight/feinstein-nya" target="_blank">Spotlight – Math & Data at WVU</a></li>
-    <li><a href="https://www.siam.org/publications/siam-news/articles/robust-poster-sessions-at-mds24-highlight-diverse-applications-of-data-science/" target="_blank">Featured at MDS24 – SIAM News</a></li>
-  </ul>
+      <div class="project-entry">
+        <div class="project-title">Knowing the Unknowns: Predictability of State-Level Attributes in Belarus</div>
+        <div class="project-meta">West Virginia University · 08/2023 – 12/2023</div>
+        <div class="project-desc">Applied ARIMA models in Python to time-series data.</div>
+      </div>
 
-  <h3>Media & Commentary</h3>
-  <ul>
-    <li><a href="https://www.post-gazette.com/news/education/2024/09/29/wvu-languages-french-club-budget-cuts/stories/202409250079" target="_blank">Coverage in the Pittsburgh Post-Gazette</a></li>
-    <li><a href="https://westvirginiawatch.com/2024/04/23/its-been-chaos-wvu-nears-end-of-tumultuous-academic-year-after-jobs-programs-unexpectedly-cut/" target="_blank">Interview with West Virginia Watch</a></li>
-  </ul>
-</section>
+      <!-- PUBLICATIONS (nested) -->
+      <div class="subsection-label">Publications &amp; Contributions</div>
 
+      <div class="pub-entry">
+        <div class="pub-type">Peer-reviewed article</div>
+        <div class="pub-text">Feinstein, N. (2023). The price of privacy: Searching for security through data and algorithms in the information age. <em>Security and Society in the Information Age, 6</em>, 210–241. <a href="https://doi.org/10.6084/m9.figshare.24602559" target="_blank" rel="noopener noreferrer">DOI ↗</a></div>
+      </div>
 
+      <div class="pub-entry">
+        <div class="pub-type">Editorial contribution</div>
+        <div class="pub-text">Feinstein, N. (2025). English text proofreader. In S. Doŭhušaŭ (Ed.), <em>Belarusian Lullabies / Беларускія калыханкі</em> (1st ed.). Studio Magenta &amp; Etna Tradycyja.</div>
+      </div>
+
+      <!-- VOLUNTEER (nested) -->
+      <div class="subsection-label">Volunteer Work</div>
+
+      <div class="volunteer-text">
+        <p>When not in the lab, I also volunteer as an English proofreader for academic and literary texts originally in Polish, Russian, and Belarusian.</p>
+        <p>Previously, I've volunteered as a Russian tutor for the <a href="https://www.ucis.pitt.edu/crees/" target="_blank" rel="noopener noreferrer">University of Pittsburgh Center for Russian, East European &amp; Eurasian Studies</a>, as an English teacher for the University of Pittsburgh's Community Conversation Course, and in affiliation with the Lithuanian, Russian, and Polish Nationality Rooms at the University of Pittsburgh.</p>
+      </div>
+
+    </section>
+
+    <!-- FUN FACTS + NEWS -->
+    <section id="fun">
+      <div class="section-label">Fun Facts</div>
+      <ul class="fun-list">
+        <li>🗣️ Fluent (somewhat) in English, Russian, and French, and have elementary understanding of Belarusian and Polish.</li>
+        <li>🧑‍🏫 Very passionate about teaching! I hold a TEFL certification, a French tutoring certification, and have three years of experience tutoring Russian.</li>
+        <li>🌍 An avid traveler! I've explored 16 countries (including four trips to Poland, with another planned!)</li>
+        <li>🎹 A piano enthusiast with a very amateur <a href="https://www.youtube.com/@nyafeinstein" target="_blank" rel="noopener noreferrer">YouTube channel</a>.</li>
+        <li>📖 A poetry lover! My favorite poets include Boris Pasternak, Yanka Kupala, and Robert William Service.</li>
+        <li>🥾 A hiking connaisseuse! I love wandering trails and pondering life's questions.</li>
+      </ul>
+
+      <!-- NEWS (nested) -->
+      <div class="subsection-label">Nya in the News</div>
+
+      <div class="news-group">
+        <div class="news-group-label">Academic &amp; University</div>
+        <ul class="news-list">
+          <li><a href="https://eberly.wvu.edu/news-events/eberly-news/2024/04/21/students-from-across-eberly-have-been-named-outstanding-seniors-outstanding-gtas-and-eberly-scholars" target="_blank" rel="noopener noreferrer">Outstanding Senior Award – WVU Eberly College</a></li>
+          <li><a href="https://mathanddata.wvu.edu/in-the-spotlight/feinstein-nya" target="_blank" rel="noopener noreferrer">Spotlight – Math &amp; Data at WVU</a></li>
+          <li><a href="https://www.siam.org/publications/siam-news/articles/robust-poster-sessions-at-mds24-highlight-diverse-applications-of-data-science/" target="_blank" rel="noopener noreferrer">Featured at MDS24 – SIAM News</a></li>
+        </ul>
+      </div>
+
+      <div class="news-group">
+        <div class="news-group-label">Media &amp; Commentary</div>
+        <ul class="news-list">
+          <li><a href="https://www.post-gazette.com/news/education/2024/09/29/wvu-languages-french-club-budget-cuts/stories/202409250079" target="_blank" rel="noopener noreferrer">Coverage in the Pittsburgh Post-Gazette</a></li>
+          <li><a href="https://westvirginiawatch.com/2024/04/23/its-been-chaos-wvu-nears-end-of-tumultuous-academic-year-after-jobs-programs-unexpectedly-cut/" target="_blank" rel="noopener noreferrer">Interview with West Virginia Watch</a></li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
     <section id="contact">
-      <h1>Contact</h1>
-      <p>You can reach me at:  
-      <br><a>nyafein@gmail.com</a></p>
-      <p>And/Or find me on:  
-      <br><a href="https://github.com/nyafein" target="_blank">GitHub</a> | 
-      <a href="https://www.linkedin.com/in/nya-feinstein-7171a9235" target="_blank">LinkedIn</a></p>
+      <div class="section-label">Contact</div>
+      <p class="contact-intro">You can reach me at <a href="mailto:nyafein@gmail.com">nyafein@gmail.com</a></p>
+      <div class="contact-links">
+        <a href="https://github.com/nyafein" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/nya-feinstein-7171a9235" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn ↗</a>
+        <a href="https://drive.google.com/file/d/1n653fLnVBG3urUsXLhU58vrQQc0k7Yfx/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="contact-link">CV ↗</a>
+      </div>
+
+      <div class="flag-wrap">
+        <div class="flag-label">Visitor Log</div>
+        <a href="https://info.flagcounter.com/2gbT"><img src="https://s01.flagcounter.com/count2/2gbT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+      </div>
     </section>
 
-    <section id = "flag counter">
-      <h1>Visitor Log</h1>
-      <a href="https://info.flagcounter.com/2gbT"><img src="https://s01.flagcounter.com/count2/2gbT/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>    
-    </section>
+  </main>
+</div>
 
-    <footer>
-      <p>&copy; 2025 Nya Feinstein</p>
- </div>
+<footer>
+  <p>&copy; 2025 Nya Feinstein</p>
+</footer>
+
+<script>
+  // Language switcher
+  const translations = {
+    en: {
+      p1: 'Hello! I\'m Nya Feinstein, a PhD student at the University of Pittsburgh working in the <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">PICSO Lab</a> under Dr. Yu-Ru Lin. My research sits at the intersection of Computational Social Science and Computational Linguistics, examining how cultural and contextual nuances embedded in language shape international discourse and information exchange across networks.',
+      p2: 'This work is deeply intertwined with my commitment to Belarusian and Slavic Studies, where I combine computational linguistics, political analysis, education, and language advocacy.'
+    },
+    be: {
+      p1: 'Прывітанне! Я Ная Файнштэйн, аспірантка Пітсбургскага ўніверсітэта, працую ў <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">лабараторыі PICSO</a> пад кіраўніцтвам прафесара Yu-Ru Lin. Мае даследаванні знаходзяцца на перакрыжаванні вылічальных сацыяльных навук і вылічальнай лінгвістыкі: я вывучаю, як культурныя і кантэкстуальныя нюансы мовы фармуюць міжнародны дыскурс і абмен інфармацыяй у сетках.',
+      p2: 'Гэтая праца цесна звязана з маёй прыхільнасцю да беларускіх і славянскіх даследаванняў, дзе я спалучаю вылічальную лінгвістыку, палітычны аналіз, адукацыю і моўную адвакатуру.'
+    },
+    pl: {
+      p1: 'Witam! Jestem Nya Feinstein, doktorantką na Uniwersytecie w Pittsburghu, gdzie pracuję w <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">laboratorium PICSO</a> pod kierunkiem dr Yu-Ru Lin. Moje badania leżą na pograniczu obliczeniowych nauk społecznych i lingwistyki obliczeniowej — analizuję, jak kulturowe i kontekstowe niuanse języka kształtują międzynarodowy dyskurs oraz wymianę informacji w sieciach.',
+      p2: 'Ta praca jest ściśle związana z moim zaangażowaniem w studia białoruskie i slawistyczne, gdzie łączę lingwistykę obliczeniową, analizę polityczną, edukację i działalność na rzecz ochrony języka.'
+    },
+    ru: {
+      p1: 'Здравствуйте! Я Ная Файнштейн, аспирантка Питтсбургского университета, работаю в <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">лаборатории PICSO</a> под руководством доктора Yu-Ru Lin. Моя научная деятельность находится на пересечении вычислительных социальных наук и вычислительной лингвистики: я изучаю, как культурные и контекстуальные нюансы языка формируют международный дискурс и обмен информацией в сетях.',
+      p2: 'Эта работа неразрывно связана с моей приверженностью белорусским и славянским исследованиям, где я сочетаю вычислительную лингвистику, политический анализ, образование и языковую защиту.'
+    },
+    fr: {
+      p1: 'Bonjour! Je m\'appelle Nya Feinstein, je suis doctorante à l\'Université de Pittsburgh au sein du <a href="https://picsolab.github.io/" target="_blank" rel="noopener noreferrer">laboratoire PICSO</a>, sous la direction du Dr Yu-Ru Lin. Mes recherches se situent à l\'intersection des sciences sociales computationnelles et de la linguistique computationnelle, en examinant comment les nuances culturelles et contextuelles du langage façonnent le discours international et l\'échange d\'informations à travers les réseaux.',
+      p2: 'Ce travail est profondément lié à mon engagement envers les études bélarussiennes et slaves, où je combine la linguistique computationnelle, l\'analyse politique, l\'éducation et la défense des langues.'
+    }
+  };
+
+  function switchLang(lang) {
+    const t = translations[lang];
+    if (!t) return;
+    document.getElementById('bio-p1').innerHTML = t.p1;
+    document.getElementById('bio-p2').innerHTML = t.p2;
+  }
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
 </body>
 </html>
